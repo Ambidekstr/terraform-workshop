@@ -1,4 +1,4 @@
-# Terraform AWS Infrastriucture Workshop
+# Terraform AWS Infrastructure Workshop
 # Created on Nov 5, 2022
 
 
