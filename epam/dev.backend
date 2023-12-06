@@ -1,0 +1,3 @@
+bucket = "terraform-state-voloshyn"
+key    = "epam/dev/terraform.tfstate"
+region = "eu-central-1"
