@@ -34,15 +34,14 @@ module "vpc" {
 }
 
 
-
 resource "aws_security_group" "lb_public_access" {
   name   = "lb-public-access"
   vpc_id = module.vpc.vpc_id
 
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"
     ]
@@ -61,18 +60,18 @@ resource "aws_security_group" "ec2_lb_access" {
   vpc_id = module.vpc.vpc_id
 
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     security_groups = [
       aws_security_group.lb_public_access.id
     ]
   }
 
   egress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"
     ]
@@ -100,6 +99,10 @@ resource "aws_instance" "app" {
   tags = {
     "Name" = "app-${count.index}"
   }
+
+  depends_on = [
+    module.vpc.natgw_ids
+  ]
 }
 
 resource "aws_lb" "app" {
@@ -108,7 +111,7 @@ resource "aws_lb" "app" {
   load_balancer_type = "application"
   enable_http2       = true
   ip_address_type    = "ipv4"
-  security_groups = [
+  security_groups    = [
     aws_security_group.lb_public_access.id
   ]
   subnets = module.vpc.public_subnets
