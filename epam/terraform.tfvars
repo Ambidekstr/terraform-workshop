@@ -1,4 +1,4 @@
 region = "eu-central-1"
-ami_id = "ami-052fd6480942d8e43"
+ami_id = "ami-042e6fdb154c830c5"
 
 instances_per_subnet = 1
