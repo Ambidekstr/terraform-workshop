@@ -6,7 +6,11 @@ variable "region" {
 variable "ami_id" {
   description = "ID of the AMI to use by EC2 Instances"
   type        = string
-  default     = ""
+
+  validation {
+    condition     = length(var.ami_id) >= 12
+    error_message = "AMI ID should be at least 12 characters long."
+  }
 }
 
 

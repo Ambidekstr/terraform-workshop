@@ -17,20 +17,6 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_ami" "debian" {
-  owners      = ["243935048354"]
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["debian-11-amd64-*"]
-  }
-  filter {
-    name   = "state"
-    values = ["available"]
-  }
-}
-
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.11.0"

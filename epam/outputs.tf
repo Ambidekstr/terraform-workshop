@@ -1,3 +1,3 @@
 output "ami_id" {
-  value = aws_instance.app[0].ami
+  value = var.ami_id
 }
