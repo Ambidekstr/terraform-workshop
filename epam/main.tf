@@ -101,3 +101,15 @@ resource "aws_instance" "app" {
     "Name" = "app-${count.index}"
   }
 }
+
+resource "aws_lb" "app" {
+  name               = "app"
+  internal           = false
+  load_balancer_type = "application"
+  enable_http2       = true
+  ip_address_type    = "ipv4"
+  security_groups = [
+    aws_security_group.lb_public_access.id
+  ]
+  subnets = module.vpc.public_subnets
+}
